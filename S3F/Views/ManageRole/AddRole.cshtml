@@ -1,0 +1,16 @@
+﻿@model IdentityRole
+@{
+    ViewData["Title"] = "افزودن نقش";
+}
+
+<h3>افزودن نقش</h3>
+
+<form asp-controller="ManageRole" asp-action="AddRole" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label class="control-label">نام نقش</label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">ثبت</button>
+</form>

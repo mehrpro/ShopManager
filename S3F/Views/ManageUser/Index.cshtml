@@ -1,0 +1,39 @@
+﻿@model List<IndexViewModel>
+@{
+    ViewData["Title"] = "فهرست";
+}
+
+
+@if (!Model.Any())
+{
+    <h3>کاربری یافت نشد</h3>
+}
+else
+{
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="card mt-2">
+            <div class="card-header">
+                نام کاربری : <b>@Model[i].UserName</b>
+            </div>
+            <div class="card-body">
+                ایمیل کاربر : <b>@Model[i].Email</b>
+            </div>
+            <div class="card-footer">
+                <form asp-controller="ManageUser" asp-action="DeleteUser" asp-route-id="@Model[i].Id" method="post">
+
+                    <a asp-controller="ManageUser" asp-action="EditUser" asp-route-id="@Model[i].Id"
+                       class="btn btn-primary">ویرایش کاربر</a>
+
+                    <a asp-controller="ManageUser" asp-action="AddUserToRole" asp-route-id="@Model[i].Id"
+                       class="btn btn-primary">اعطای نقش</a>
+                    <a asp-controller="ManageUser" asp-action="RemoveUserFromRole" asp-route-id="@Model[i].Id"
+                       class="btn btn-danger">حذف نقش</a>
+
+                    <button type="submit" class="btn btn-danger">حذف کاربر</button>
+                </form>
+            </div>
+        </div>
+    }
+}
+
