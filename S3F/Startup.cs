@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
@@ -31,6 +32,9 @@ namespace SPS
         {
             //اجرا مدل و کنترل ها
             services.AddControllersWithViews().AddRazorRuntimeCompilation();// افزودن قابلیت رندر مجدد ریزور در زمان اجرا
+
+            //AutoMapper StartUp
+            services.AddAutoMapper(typeof(Startup));
 
             //اضافه کردن سرویس بانک اطلاعاتی
             services.AddDbContextPool<AppDbContext>(op =>

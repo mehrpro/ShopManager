@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SPS.Entities
 {
     public class CommodityPrice
     {
+        public CommodityPrice()
+        {
+            StoreHouses = new HashSet<StoreHouse>();
+        }
         
         public int PriceId { get; set; }
         [Key,ForeignKey("Commodity")]
@@ -21,6 +27,10 @@ namespace SPS.Entities
         public virtual Commodity Commodity { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual Unit Unit { get; set; }
+
+
+
+        public virtual ICollection<StoreHouse> StoreHouses { get; set; }
 
     }
 }

@@ -50,8 +50,8 @@ namespace SPS.Models.Context
                 e.HasKey(x => x.CommodityId);
                 e.Property(x => x.Description).HasMaxLength(350);
                 e.Property(x => x.CommodityName).HasMaxLength(100).IsRequired();
-                e.Property(x => x.Enabled).HasDefaultValue(true).IsRequired();
-                e.Property(x => x.Register).HasDefaultValue(DateTime.Now).IsRequired();
+                e.Property(x => x.Enabled).IsRequired();
+                e.Property(x => x.Register).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
             });
 
             builder.Entity<CommodityPrice>(e =>
@@ -70,8 +70,8 @@ namespace SPS.Models.Context
                 e.HasKey(x => x.SellerId);
                 e.Property(x => x.SellerName).HasMaxLength(150).IsRequired().IsUnicode();
                 e.Property(x => x.Company).HasMaxLength(350);
-                e.Property(x => x.Enabled).IsRequired().HasDefaultValue(true);
-                e.Property(x => x.Register).HasDefaultValue(DateTime.Now).IsRequired();
+                e.Property(x => x.Enabled).IsRequired();
+                e.Property(x => x.Register).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
 
             });
 
@@ -79,16 +79,16 @@ namespace SPS.Models.Context
             {
                 e.HasKey(x => x.IncomeId);
                 e.Property(x => x.PercentageOfIncome).IsRequired().HasDefaultValue(20);
-                e.Property(x => x.Enabled).HasDefaultValue(true).IsRequired();
-                e.Property(x => x.Register).HasDefaultValue(DateTime.Now).IsRequired();
+                e.Property(x => x.Enabled).IsRequired();
+                e.Property(x => x.Register).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
             });
 
             builder.Entity<Unit>(e =>
             {
                 e.HasKey(x => x.UnitId);
                 e.Property(x => x.UnitName).HasMaxLength(50).IsRequired().IsUnicode();
-                e.Property(x => x.Enabled).HasDefaultValue(true).IsRequired();
-                e.Property(x => x.Register).HasDefaultValue(DateTime.Now).IsRequired();
+                e.Property(x => x.Enabled).IsRequired(); 
+                e.Property(x => x.Register).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
             });
 
             builder.Entity<StoreHouse>(e =>

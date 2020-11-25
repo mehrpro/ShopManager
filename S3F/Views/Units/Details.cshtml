@@ -1,0 +1,36 @@
+﻿@model SPS.Entities.Unit
+
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<h3>جزئیات</h3>
+
+<div>
+    <h4>واحد</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UnitName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UnitName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Register)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Register)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Enabled)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.UnitId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

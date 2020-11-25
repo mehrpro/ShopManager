@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPS.Models.Context;
 
 namespace SPS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201124195828_update6")]
+    partial class update6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,7 +294,9 @@ namespace SPS.Migrations
                         .HasColumnType("nvarchar(350)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTime>("Register")
                         .ValueGeneratedOnAdd()
@@ -345,7 +349,9 @@ namespace SPS.Migrations
                         .UseIdentityColumn();
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<byte>("PercentageOfIncome")
                         .ValueGeneratedOnAdd()
@@ -377,7 +383,9 @@ namespace SPS.Migrations
                         .HasColumnType("nvarchar(350)");
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTime>("Register")
                         .ValueGeneratedOnAdd()
@@ -414,8 +422,6 @@ namespace SPS.Migrations
 
                     b.HasKey("StoreId");
 
-                    b.HasIndex("CommodityId");
-
                     b.ToTable("StoreHouses");
                 });
 
@@ -427,7 +433,9 @@ namespace SPS.Migrations
                         .UseIdentityColumn();
 
                     b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTime>("Register")
                         .ValueGeneratedOnAdd()
@@ -534,25 +542,9 @@ namespace SPS.Migrations
                     b.Navigation("AddressBook");
                 });
 
-            modelBuilder.Entity("SPS.Entities.StoreHouse", b =>
-                {
-                    b.HasOne("SPS.Entities.CommodityPrice", "CommodityPrice")
-                        .WithMany("StoreHouses")
-                        .HasForeignKey("CommodityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CommodityPrice");
-                });
-
             modelBuilder.Entity("SPS.Entities.AddressBook", b =>
                 {
                     b.Navigation("Sellers");
-                });
-
-            modelBuilder.Entity("SPS.Entities.CommodityPrice", b =>
-                {
-                    b.Navigation("StoreHouses");
                 });
 
             modelBuilder.Entity("SPS.Entities.Seller", b =>
