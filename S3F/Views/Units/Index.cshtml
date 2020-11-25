@@ -7,7 +7,7 @@
 <h3>فهرست واحدها</h3>
 
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">جدید</a>
+    <a asp-action="Create" class="btn btn-success">جدید</a>
 </p>
 <table class="table">
     <thead>
@@ -35,14 +35,14 @@
                     <a asp-action="Edit" asp-route-id="@item.UnitId" class="btn btn-warning btn-sm">ویرایش</a> |
                     @if (!item.IsDelete)
                     {
-                        <button type="button" class="btn btn-danger btn-sm"
+                        @*<button type="button" class="btn btn-danger btn-sm"
                                 data-item-id="@item.UnitId" data-item-description="@item.UnitName"
                                 data-toggle="modal" data-target="#confirm-delete">
                             حذف
-                        </button>
+                        </button>*@
 
 
-                        @*<a asp-action="Delete" asp-route-id="@item.UnitId">حذف</a>*@
+                        <a asp-action="Delete" asp-route-id="@item.UnitId" class="btn btn-danger btn-sm">حذف</a>
                     }
 
 
@@ -53,38 +53,12 @@
     </tbody>
 </table>
 
-
-
-
-
-
-
-
-
-@*@foreach (var item in Model)
-    {
-        <tr>
-            <td>@index</td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Report.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                <button type="button" class="btn btn-danger btn-sm" data-item-id="@item.ID" data-item-description="@item.Report.Description" data-toggle="modal" data-target="#confirm-delete">Delete</button>
-            </td>
-        </tr>
-    }*@
-
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+@*<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header"  >
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="direction: rtl;">حذف واحد</h4>
+                <h4 class="modal-title" id="myModalLabel">حذف واحد</h4>
             </div>
             <div class="modal-body">
                 از حذف واحد  <span class="description"></span> مطمئن هستید ؟
@@ -96,10 +70,10 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
-@section Scripts
+@*@section Scripts
 {
     <script>
         $('#confirm-delete').on('click', '.btn-ok', function(e) {
@@ -117,4 +91,4 @@
         });
     </script>
 
-}
+}*@
