@@ -17,7 +17,7 @@ namespace SPS.Controllers
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
 
-        public UnitsController(AppDbContext context,IMapper mapper)
+        public UnitsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -26,7 +26,19 @@ namespace SPS.Controllers
         // GET: Units
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Units.ToListAsync());
+           
+            var unitIdListFromCommodityPrice = await _context.CommodityPrices.Select(x => x.UnitId).ToListAsync();//لیست تمام واحدهای استفاده شده در جدول قیمت گذاری
+            var unitsList = await _context.Units.AsNoTracking().ToListAsync();
+            var unitIdList = unitsList.Select(x => x.UnitId); 
+            //var qry = unitIdListFromCommodityPrice.Where(row => !unitIdList.Contains(row)).ToList();
+            var list = new List<UnitViewModel>();
+            foreach (var unit in unitsList)
+            {
+                var item = _mapper.Map<UnitViewModel>(unit);
+                item.IsDelete = unitIdListFromCommodityPrice.Any(row => unitIdList.Contains(row));
+                list.Add(item);
+            }
+            return View(list);
         }
 
 
@@ -41,17 +53,16 @@ namespace SPS.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UnitViewModel unit)
+        public async Task<IActionResult> Create(UnitViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var n = new Unit();
-                var newUnit = _mapper.Map(n, unit);
+                var newUnit = _mapper.Map<Unit>(model);
                 _context.Add(newUnit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(unit);
+            return View(model);
         }
 
         // GET: Units/Edit/5
@@ -75,7 +86,7 @@ namespace SPS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UnitId,UnitName,Register,Enabled")] Unit unit)
+        public async Task<IActionResult> Edit(int id, Unit unit)
         {
             if (id != unit.UnitId)
             {

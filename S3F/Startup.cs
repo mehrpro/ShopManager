@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using SPS.Models.Context;
 using PersianTranslation.Identity;
+using SPS.AutoMapper;
 using SPS.Repository;
 
 namespace SPS
@@ -33,8 +34,16 @@ namespace SPS
             //اجرا مدل و کنترل ها
             services.AddControllersWithViews().AddRazorRuntimeCompilation();// افزودن قابلیت رندر مجدد ریزور در زمان اجرا
 
+
+            // Auto Mapper Configurations
+            //var mapperConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddProfile(new AutoMapping());
+            //});
+
+            //IMapper mapper = mapperConfig.CreateMapper();
             //AutoMapper StartUp
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             //اضافه کردن سرویس بانک اطلاعاتی
             services.AddDbContextPool<AppDbContext>(op =>
