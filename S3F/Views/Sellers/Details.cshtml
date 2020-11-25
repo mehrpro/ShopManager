@@ -1,0 +1,49 @@
+﻿@model SellerViewModel
+
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<h3>جزئیات</h3>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SellerName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SellerName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Register)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var reg = Model.Register.PersianConvertorFull();
+            }
+            @reg
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var status = Model.Enabled ? "فعال" : "غیر فعال ";
+            }
+            @status
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SellerId" class="btn btn-warning btn-sm">ویرایش</a> |
+    <a asp-action="Index"  class="btn btn-secondary btn-sm">بازگشت</a>
+</div>

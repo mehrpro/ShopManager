@@ -36,14 +36,15 @@ namespace SPS
 
 
             // Auto Mapper Configurations
-            //var mapperConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddProfile(new AutoMapping());
-            //});
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapping());
+            });
 
-            //IMapper mapper = mapperConfig.CreateMapper();
+            IMapper mapper = mapperConfig.CreateMapper();
             //AutoMapper StartUp
-            services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddAutoMapper(typeof(Startup).Assembly);      
+           // services.AddAutoMapper(typeof(Startup).Assembly);
 
             //اضافه کردن سرویس بانک اطلاعاتی
             services.AddDbContextPool<AppDbContext>(op =>

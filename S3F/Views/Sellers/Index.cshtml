@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SPS.Entities.Seller>
+
+@{
+    ViewData["Title"] = "فهرست";
+}
+
+<h3>تامین کنندگان</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SellerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.SellerId" class="btn btn-info btn-sm">جزئیات</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

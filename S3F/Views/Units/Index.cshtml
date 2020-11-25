@@ -35,18 +35,8 @@
                     <a asp-action="Edit" asp-route-id="@item.UnitId" class="btn btn-warning btn-sm">ویرایش</a> |
                     @if (!item.IsDelete)
                     {
-                        @*<button type="button" class="btn btn-danger btn-sm"
-                                data-item-id="@item.UnitId" data-item-description="@item.UnitName"
-                                data-toggle="modal" data-target="#confirm-delete">
-                            حذف
-                        </button>*@
-
-
                         <a asp-action="Delete" asp-route-id="@item.UnitId" class="btn btn-danger btn-sm">حذف</a>
                     }
-
-
-
                 </td>
             </tr>
         }

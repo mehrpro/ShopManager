@@ -17,8 +17,8 @@ namespace SPS.Entities
         public string Company { get; set; }
         public DateTime Register { get; set; }
         public bool Enabled { get; set; }
-        [Key,ForeignKey("AddressBook")]
-        public int AddressBookId { get; set; }
+        [ForeignKey("AddressBook")]
+        public int? AddressBookId { get; set; }
         
 
 

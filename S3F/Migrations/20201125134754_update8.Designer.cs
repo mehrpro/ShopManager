@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPS.Models.Context;
 
 namespace SPS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201125134754_update8")]
+    partial class update8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,6 +372,7 @@ namespace SPS.Migrations
                         .UseIdentityColumn();
 
                     b.Property<int?>("AddressBookId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Company")
@@ -527,7 +530,9 @@ namespace SPS.Migrations
                 {
                     b.HasOne("SPS.Entities.AddressBook", "AddressBook")
                         .WithMany("Sellers")
-                        .HasForeignKey("AddressBookId");
+                        .HasForeignKey("AddressBookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AddressBook");
                 });

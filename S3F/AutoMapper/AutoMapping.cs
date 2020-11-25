@@ -14,7 +14,10 @@ namespace SPS.AutoMapper
         {
 
             CreateMap<UnitViewModel, Unit>();
-            CreateMap<Unit,UnitViewModel>();
+            CreateMap<Unit, UnitViewModel>();
+
+            CreateMap<SellerViewModel, Seller>();
+            CreateMap<Seller, SellerViewModel>();
         }
     }
 }

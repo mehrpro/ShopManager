@@ -72,7 +72,7 @@ namespace SPS.Models.Context
                 e.Property(x => x.Company).HasMaxLength(350);
                 e.Property(x => x.Enabled).IsRequired();
                 e.Property(x => x.Register).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
-
+                
             });
 
             builder.Entity<Percentage_Income>(e =>
