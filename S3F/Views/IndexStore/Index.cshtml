@@ -1,0 +1,53 @@
+﻿@model IEnumerable<IndexStoreViewModel>
+
+@{
+    ViewData["Title"] = "فهرست انبار";
+}
+
+<h3>فهرست انبار</h3>
+
+<p>
+    <a asp-action="Create">انبار جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndexId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndexNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndexName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndexDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

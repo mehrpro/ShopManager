@@ -1,0 +1,41 @@
+﻿@model IndexStoreViewModel
+
+@{
+    ViewData["Title"] = "انبار جدید";
+}
+
+<h3>انبار جدید</h3>
+
+<h4>مشخصات را با دقت وارد کنید</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IndexNumber" class="control-label"></label>
+                <input asp-for="IndexNumber" class="form-control" />
+                <span asp-validation-for="IndexNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndexName" class="control-label"></label>
+                <input asp-for="IndexName" class="form-control" />
+                <span asp-validation-for="IndexName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndexDescription" class="control-label"></label>
+                <input asp-for="IndexDescription" class="form-control" />
+                <span asp-validation-for="IndexDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-secondary" >انصراف</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

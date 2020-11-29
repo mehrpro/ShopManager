@@ -159,5 +159,36 @@ namespace SPS.Controllers.Manager
         {
             return _context.Sellers.Any(e => e.SellerId == id);
         }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IsNameInUse(string sellerName)
+        {
+            var find = await _context.Sellers.AnyAsync(x => x.SellerName == sellerName);
+            if (find == false) return Json(true);
+            return Json("این نام قبلا ثبت شده است");
+        }
+      
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IsCompanyInUse(string companyName)
+        {
+            var find = await _context.Sellers.AnyAsync(x => x.Company == companyName);
+            if (find == false) return Json(true);
+            return Json("این شرکت یا فروشگاه قبلا ثبت شده است");
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IsMobileInUse(string mobileNumber)
+        {
+            var find = await _context.AddressBooks.AnyAsync(x => x.MobileNumber1 == mobileNumber);
+            if (find == false) return Json(true);
+            return Json("تلفن همراه قبلا ثبت شده است");
+        }
     }
 }

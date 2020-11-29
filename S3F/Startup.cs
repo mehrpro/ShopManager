@@ -9,12 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using SPS.Models.Context;
 using PersianTranslation.Identity;
 using SPS.AutoMapper;
+using SPS.Entities.Product;
 using SPS.Repository;
 
 namespace SPS
@@ -32,7 +34,13 @@ namespace SPS
         public void ConfigureServices(IServiceCollection services)
         {
             //اجرا مدل و کنترل ها
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();// افزودن قابلیت رندر مجدد ریزور در زمان اجرا
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddFluentValidation(fv =>
+                    {
+                        fv.RegisterValidatorsFromAssemblyContaining<IndexStoreValidator>(
+                            lifetime: ServiceLifetime.Singleton);
+                    });
 
 
             // Auto Mapper Configurations
@@ -65,6 +73,7 @@ namespace SPS
                 .AddDefaultTokenProviders().AddErrorDescriber<PersianIdentityErrorDescriber>();
 
             services.AddScoped<IMessageSend21, MessageSend21>();
+            services.AddScoped<IProduction, Production>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

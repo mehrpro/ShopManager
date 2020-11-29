@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SPS.Entities;
+using SPS.Entities.Product;
 
 
 namespace SPS.Models.Context
@@ -23,6 +24,7 @@ namespace SPS.Models.Context
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<StoreHouse> StoreHouses { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<IndexStore> IndexStores { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -96,7 +98,18 @@ namespace SPS.Models.Context
                 e.HasKey(x => x.StoreId);
                 e.Property(x => x.CommodityId).IsRequired();
                 e.Property(x => x.Stock).IsRequired().HasDefaultValue(0);
+
+
             });
+
+            builder.Entity<IndexStore>(e =>
+            {
+                e.HasKey(x => x.IndexId);
+                e.Property(x => x.IndexName).IsRequired().HasMaxLength(100);
+                e.Property(x => x.IndexNumber).IsRequired();
+                e.Property(x => x.IndexDescription).HasMaxLength(150);
+            });
+
         }
     }
 }

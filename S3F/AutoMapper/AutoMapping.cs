@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using SPS.Entities;
+using SPS.Entities.Product;
 using SPS.ViewModels.Shop;
 
 namespace SPS.AutoMapper
@@ -18,6 +19,13 @@ namespace SPS.AutoMapper
 
             CreateMap<SellerViewModel, Seller>();
             CreateMap<Seller, SellerViewModel>();
+
+
+            CreateMap<IndexStoreViewModel, IndexStore>();
+            CreateMap<IndexStore, IndexStoreViewModel>();
+
+
+
         }
     }
 }

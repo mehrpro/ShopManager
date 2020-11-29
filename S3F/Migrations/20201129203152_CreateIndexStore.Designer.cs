@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPS.Models.Context;
 
 namespace SPS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201129203152_CreateIndexStore")]
+    partial class CreateIndexStore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,8 +380,10 @@ namespace SPS.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<byte>("IndexNumber")
-                        .HasColumnType("tinyint");
+                    b.Property<string>("IndexNumber")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.HasKey("IndexId");
 
